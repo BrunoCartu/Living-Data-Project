@@ -23,6 +23,7 @@ git push
 
 
 CREATING A NEW BRANCH
+This is quite useful for branching: https://gist.github.com/blackfalcon/8428401
 - to see what branch you are on, type
 git branch (there will be a * beside the branch you are on)
 - go to a different branch:
@@ -32,3 +33,7 @@ git checkout -b my-new-branch
 - pull to new branch:
 git pull origin master (or potentially just git pull)
 - now, all changes will be on this branch, which can later be merged with the master branch
+- push branch to github
+git push origin my-new-branch
+
+
