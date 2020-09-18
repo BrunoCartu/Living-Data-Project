@@ -82,3 +82,12 @@ library(tidyr)
 3. continue working with `renv` as usually (see above)
 
 **NOTE:** you can restore the last version of your library using `renv::restore()`
+
+
+## Collaborating using `renv` and GitHub
+
+[Here](https://rstudio.github.io/renv/articles/collaborating.html) is a great resource that will walk you through sharing your virtual environment and collaborating on GitHub. 
+
+
+
+
