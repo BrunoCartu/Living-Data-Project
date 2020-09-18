@@ -1,0 +1,84 @@
+---
+title: "A Brief Overview of Virtual Environments in R"
+author: "Sarah Amundrud (adapted from Kevin Ushey)"
+date: "16/09/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## What is a virtual environment?
+Virtual environments create isolated environment for your projects, allowing each project to have its own dependencies (e.g., R package versions), regardless of the dependencies of other projects. 
+
+
+## Why should I always work in a virtual environment?
+Virtual environments ensure that your projects are reproducible (both for your future self and for others). They do so by ensuring that, even if you install new versions of R packages, the package versions associated with your project stay the same. In practice, this means that if you run your code in a year from now (or 10 years from now), it will give you the same results, even if the associated R packages have changed and no longer work (throw errors) with your code.
+In addition, virtual environments make it easier for you to collaborate on and share your projects, ensuring that everybody can easily use the same package versions.
+
+**In general, anytime you start a new project, it is advised that you maintain a separate environment.**
+
+
+## The `renv` package
+The `renv` R package is a user-friendly option to manage virtual environments in R.
+For a great overview, see ["renv: Project Environments for R"](https://kevinushey-2020-rstudio-conf.netlify.app/slides.html#1) and read the [`renv` Vignette](https://rstudio.github.io/renv/articles/renv.html) by Kevin Ushey.
+
+## `renv` Mini Tutorial (start a new project from scratch)
+**Before you start, you should be familiar with R Projects in RStudio and have the `renv` package installed**
+
+1. create a new project in RStudio, and tick the box: `use renv with this project`
+2. in the console, type `renv::status()` to check if your virtual environment (VE) is set up properly
+    + the output should be: `The project is already synchronized with the lockfile`
+3. install and load packages in a new script:
+    + e.g., install `dplyr` and `lubridate`, then run
+
+```
+library(dplyr)
+library(lubridate)
+```
+
+4. save the library to your VE: first, save your script, then type (in the console) `renv::snapshot()`
+    + use the same command (save script, then `renv::snapshot()`) to keep updating your environment as you work on your project
+5. check again with `renv::status()`
+6. check out your library: in the console, type `renv::dependencies()`
+7. save and close your project
+
+
+**Adding more packages to your virtual environment**
+
+1. open your RStudio project
+2. add a new R package to your project
+    + e.g., install `tidyr`, then add this package to your script and run
+
+```
+library(dplyr)
+library(lubridate)
+library(tidyr)
+``` 
+
+3. check your VE with `renv::status()`
+    + note that your VE is not up to date anymore
+4. update your VE by saving your script, then typing `renv::snapshot()`
+5. check again: `renv::status()`
+6. check out your library: in the console, type `renv::dependencies()`
+7. save and close your project
+
+
+
+## Use `renv` with an existing project
+*do this if you already started a project, but you have not yet associated it with a virtual environment*
+
+1. open your project in RStudio, then load `renv` and your other R packages
+
+```
+library(renv)
+library(dplyr)
+library(tidyr)
+``` 
+
+2. initiate your VE: in the console, type `renv::init()`
+3. continue working with `renv` as usually (see above)
+
+**NOTE:** you can restore the last version of your library using `renv::restore()`
