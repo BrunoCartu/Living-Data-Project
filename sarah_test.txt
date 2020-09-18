@@ -1,2 +1,3 @@
 this is a test
-Bruno: "Hi Sarah, are we going to become Git gurus?"
+Bruno: "Hey Sarah, are we going to become GitHub gurus???"
+Bruno: "Second try, somehow, it did not work properly"
