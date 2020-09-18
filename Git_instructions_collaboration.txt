@@ -37,3 +37,17 @@ git pull origin master (or potentially just git pull)
 git push origin my-new-branch
 
 
+MERGING BRANCH TO MASTER
+- go to github
+- navigate to your branch
+- click on "Compare & pull request"
+- make sure you compare the proper branches (master <- my-new-branch)
+- view the changes you made (scroll down)
+- create pull request
+- write a note on the changes, and click "Create pull request"
+- close the pull request
+- it is considered best practice to delete your branch after merging
+
+NOTE
+- if several people work on the same branch, make sure you are always on the most up-to-date version to avoid conflicts
+git pull
