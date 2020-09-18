@@ -1,0 +1,186 @@
+---
+title: Short Paper
+author:
+  - name: Alice Anonymous
+    email: alice@example.com
+    affiliation: Some Institute of Technology
+    footnote: 1
+  - name: Bob Security
+    email: bob@example.com
+    affiliation: Another University
+  - name: Cat Memes
+    email: cat@example.com
+    affiliation: Another University
+    footnote: 2
+  - name: Derek Zoolander
+    email: derek@example.com
+    affiliation: Some Institute of Technology
+    footnote: 2
+address:
+  - code: Some Institute of Technology
+    address: Department, Street, City, State, Zip
+  - code: Another University
+    address: Department, Street, City, State, Zip
+footnote:
+  - code: 1
+    text: "Corresponding Author"
+  - code: 2
+    text: "Equal contribution"
+abstract: |
+  # Abstract
+  
+  Noise, as the term itself suggests, is most often seen a nuisance to ecological insight, a inconvenient reality that must be acknowledged, a haystack that must be stripped away to reveal the processes of interest underneath. Yet despite this well-earned reputation, noise is often interesting in its own right: noise can induce novel phenomena that could not be understood from some underlying determinstic model alone.  Nor is all noise the same, and close examination of differences in frequency, color or magnitude can reveal insights that would otherwise be inaccessible.  Yet with each aspect of stochasticity leading to some new or unexpected behavior, the time is right to move beyond the familiar refrain of "everything is important" [@harrison_back_2019].  Stochastic phenomena can suggest new ways of inferring process from pattern, and thus spark more dialog between theory and empirical perspectives that best advances the field as a whole. I highlight a few compelling examples, while observing that the study of stochastic phenomena are only beginning to make this translation into empirical inference.  There are rich opportunities at this interface in the years ahead.  
+  
+  \newpage
+
+journal: "An awesome journal"
+date: "`r Sys.Date()`"
+layout: review
+bibliography: My_Ecology_Letters_article.bib  # mybibfile.bib #  #
+# linenumbers: true
+# numbersections: true
+csl: elsevier-harvard.csl
+output: rticles::elsevier_article
+preamble: |
+  \usepackage[nomarkers]{endfloat}
+  \linenumbers
+  \usepackage{setspace}
+  \doublespacing
+
+---
+
+```{r, include=F}
+# install.packages("rticles")
+# https://github.com/crsh/citr
+# https://annakrystalli.me/rrtools-repro-research/paper.html
+
+# To install TinyTeX for R users: to be able to compile a Rmd to PDF
+# https://yihui.name/tinytex/#for-r-users
+# install.packages('tinytex')
+# tinytex::install_tinytex()
+
+# To include citations from a Bib-TeX-file
+# install.packages("citr")
+library(citr)
+```
+
+```{r, include = F}
+# BUGs
+# for Harrison et al 2019, I had to change the name of the reference from "harrison_back--back_2019" to "harrison_back_2019", reload the content of directory and restart the R session
+
+# Git and Github stuff
+# https://happygitwithr.com/push-pull-github.html
+```
+
+
+```{r libraries, include = F}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, dev="cairo_pdf", fig.width=7, fig.height=3.5)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(ggthemes)
+# library(rrcompendium)
+
+theme_set(theme_grey())
+
+```
+
+```{r, include = F}
+add.transparency.colour <- function(colours,alpha=0.35){
+  col.rgb <- col2rgb(colours)
+  colnames(col.rgb) <- colours
+  output <- c()
+  for(i in 1:length(col.rgb[1,])){
+    output[i] <- rgb(red = col.rgb[1,i],green = col.rgb[2,i],blue = col.rgb[3,i], maxColorValue = 255,alpha = alpha*255)
+  }
+  names(output) <- names(colours)
+  return(output)
+}
+```
+
+# Introduction
+
+This is my awesome introduction that clearly defines the context and the gaps I am going to address with this beautiful paper. I will also states the hypotheses that I will test. It is going to be great, yeah yeah.
+
+This introduction is going good, yes indeed, it will. And as it has been proven before [@harrison_back_2019; @ho_climate_2019], this has not been proven before. Evennnn better!
+
+  \newpage
+
+# Methods
+
+So I used a very cool method [@ho_climate_2019]. Yeah yeah, but see also [@harrison_back_2019]. Oh and there is also [@salih_fluorescent_2000], or [@baird_effects_2018].
+
+Here is the model I used (it is an awesome model):
+
+\begin{align}
+\frac{\mathrm{d} n}{\mathrm{d} t} = \underbrace{c n \left(1 - \frac{n}{N}\right)}_{\textrm{birth}} - \underbrace{e n}_{\textrm{death}}, \label{levins}
+\end{align}
+
+  \newpage
+
+# Results
+
+
+We can see that the variables increase and plato to a maximum value (Figure \ref{fig:figure1}). But my favorite figure is Figure \ref{fig:myfigure}.
+
+
+# Discussion
+
+# Acknowledgements
+
+The author acknowledges feedback and advice from the editor,
+Tim Coulson and two anonymous reviewers. This work was supported in
+part by  USDA National Institute of Food and Agriculture, Hatch
+project CA-B-INS-0162-H.
+
+# References
+
+
+\newpage
+
+\begin{landscape}
+
+```{r figure1, figure1, fig.cap="\\label{fig:figure1}Population dynamics from a Gillespie simulation of the Levins model with large (N=1000, panel A) and small (N=100, panel B) number of sites (blue) show relatively weaker effects of demographic noise in the bigger system. Models are otherwise identical, with e = 0.2 and c = 1 (code in appendix A). Theoretical predictions for mean and plus/minus one standard deviation shown in horizontal re dashed lines.", out.extra='angle=0', fig.align='center', fig.width=4.5, fig.height=3}
+# create colour palette
+colours <- ptol_pal()(2)
+
+# load-data
+data <- read_csv(here::here("Dataset_raw/gillespie.csv"), col_types = "cdiddd")  
+
+# recode-data
+data <- data %>% 
+  mutate(system_size = recode(system_size, large = "A. 1000 total sites", small= "B. 100 total sites")) 
+
+# plot-gillespie
+data %>%
+  ggplot(aes(x = time)) + 
+  geom_hline(aes(yintercept = mean), lty=2, col=colours[2]) + 
+  geom_hline(aes(yintercept = minus_sd), lty=2, col=colours[2]) + 
+  geom_hline(aes(yintercept = plus_sd), lty=2, col=colours[2]) + 
+  geom_line(aes(y = n), col=colours[1]) +
+  facet_wrap(~system_size, scales = "free_y")
+```
+
+```{r myfigure, fig.cap="\\label{fig:myfigure}The is my figure. It is awesome. Plus it does not use ggplot, which is even better. It shows the level of happiness relatively to the amount of cheese people eat.", fig.width=4.5, fig.height=3}
+colPts <- add.transparency.colour(colours = "grey60", alpha = 0.35)
+
+df <- data.frame()
+group.var <- c("never","once a month","every day")
+for(i in 1:length(group.var)){
+  happynesshere <- rnorm(n = 100, mean = 0, sd = 2) + i*3
+  df.parthere <- cbind(rep(group.var[i],length(happynesshere)),happynesshere)
+  df <- rbind(df,df.parthere)
+}
+names(df) <- c("Cheese_freq","happiness")
+df$happiness <- as.numeric(as.character(df$happiness))
+par(mar=c(4,4,0.5,0.5))
+stripchart(x = happiness ~ Cheese_freq, data = df, vertical = T, method = "jitter", pch = 16, col =  colPts, cex = 1.5, las = 1)
+par(new = T)
+colHere <- add.transparency.colour(colours = "white", alpha = 0)
+boxplot(happiness ~ Cheese_freq, data = df, horizontal = F, col = colHere, at =  1:length(levels(df$Cheese_freq)), add = T, outline = F, names = c("","",""), xaxt="n", yaxt = "n", boxwex=0.5)
+mean.here <- tapply(df$happiness, df$Cheese_freq, mean)
+points(y = mean.here, x = 1:length(mean.here), cex = 2, pch = 16)
+```
+
+\end{landscape}
+

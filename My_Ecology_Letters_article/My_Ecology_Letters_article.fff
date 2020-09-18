@@ -1,0 +1,17 @@
+\begin{figure}
+
+{\centering \includegraphics[angle=0]{My_Ecology_Letters_article_files/figure-latex/figure1, figure1-1}
+
+}
+
+\caption{\label{fig:figure1}Population dynamics from a Gillespie simulation of the Levins model with large (N=1000, panel A) and small (N=100, panel B) number of sites (blue) show relatively weaker effects of demographic noise in the bigger system. Models are otherwise identical, with e = 0.2 and c = 1 (code in appendix A). Theoretical predictions for mean and plus/minus one standard deviation shown in horizontal re dashed lines.}\label{fig:figure1, figure1}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\includegraphics{My_Ecology_Letters_article_files/figure-latex/myfigure-1.pdf}
+\caption{\label{fig:myfigure}The is my figure. It is awesome. Plus it
+does not use ggplot, which is even better. It shows the level of
+happiness relatively to the amount of cheese people eat.}
+\end{figure}
