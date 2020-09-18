@@ -1,0 +1,26 @@
+Some brief instructions on how to collaborate on GitHub
+(for Windows using Bash)
+
+
+JOINING AN EXISTING PROJECT
+- get invited as a collaborator
+- click on CODE (green) button and copy link
+- make a new folder on your local machine
+- open GitBash, type:
+git clone https://.....
+- this clones the folder from GitHub into the folder you just made
+- navigate to shared folder (inside the folder you made) (I did this by closing Bash, and reopening it at the inside folder)
+- check if folder is connected to correct github destination:
+git remote -v
+
+
+CHANGING FILES AND PUSHING TO GITHUB
+- after making changes, add them to git
+git add . (adds everything)
+git add test.txt (only adds test.txt)
+git commit -m "..."
+git push
+
+
+
+
