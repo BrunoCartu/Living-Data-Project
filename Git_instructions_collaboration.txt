@@ -14,7 +14,7 @@ git clone https://.....
 git remote -v
 
 
-CHANGING FILES AND PUSHING TO GITHUB
+CHANGING FILES AND PUSHING TO GITHUB (to MASTER)
 - after making changes, add them to git
 git add . (adds everything)
 git add test.txt (only adds test.txt)
@@ -22,5 +22,13 @@ git commit -m "..."
 git push
 
 
-
-
+CREATING A NEW BRANCH
+- to see what branch you are on, type
+git branch (there will be a * beside the branch you are on)
+- go to a different branch:
+git checkout branchname
+- make a new branch:
+git checkout -b my-new-branch
+- pull to new branch:
+git pull origin master (or potentially just git pull)
+- now, all changes will be on this branch, which can later be merged with the master branch
