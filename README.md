@@ -7,3 +7,4 @@ This is a a line added from GitHub
 This a test to see if the renv/ folder is going to be uploaded as wella line I wrote from my laptop
 another line from my laptop
 adding a line
+This line was added from my laptop and Rstudio
